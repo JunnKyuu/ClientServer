@@ -4,12 +4,8 @@ import java.io.InputStreamReader;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 public class Client {
-	
-	protected static StudentList studentList;
-	protected ArrayList<Student> vStudent;
 
 	public static void main(String[] args) throws NotBoundException, IOException {
 		ServerIF server;
@@ -29,11 +25,10 @@ public class Client {
 			}
 			
 			else if(sChoice.equals("2")) {
-				System.out.println("Homework!!");
+				System.out.println("Server's answer: " + server.getAllCourse());
 			}		
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 	}
-
 }

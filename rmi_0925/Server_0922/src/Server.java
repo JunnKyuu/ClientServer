@@ -7,9 +7,6 @@ import java.util.ArrayList;
 
 public class Server extends UnicastRemoteObject implements ServerIF {
 
-	protected static StudentList studentList;
-	protected ArrayList<Student> vStudent;
-	
 	private static DataIF data;
 	private static final long serialVersionUID = 1L;
 	
@@ -22,7 +19,6 @@ public class Server extends UnicastRemoteObject implements ServerIF {
 			Server server = new Server();
 			Naming.rebind("Server", server);
 			System.out.println("Server is ready!!");
-			
 			data = (DataIF) Naming.lookup("Data");
 		} catch (RemoteException e){
 			e.printStackTrace();
@@ -34,5 +30,9 @@ public class Server extends UnicastRemoteObject implements ServerIF {
 	@Override
 	public ArrayList<Student> getAllStudent() throws RemoteException {
 		return data.getAllStudent();
+	}
+	
+	public ArrayList<Course> getAllCourse() throws RemoteException {
+		return data.getAllCourse();
 	}
 }

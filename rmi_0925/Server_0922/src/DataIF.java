@@ -5,4 +5,5 @@ import java.util.ArrayList;
 
 public interface DataIF extends Remote {
 	ArrayList<Student> getAllStudent() throws RemoteException;
+	ArrayList<Course> getAllCourse() throws RemoteException;
 }
