@@ -29,6 +29,7 @@ public class Client {
 	private void login(ServerIF server, BufferedReader objReader, ArrayList<Student> studentData,
 			ArrayList<Course> courseData)
 			throws MalformedURLException, RemoteException, NotBoundException, IOException {
+		
 		boolean isLoggedIn = false;
 		isLoggedIn = checkLogin(server, studentData, isLoggedIn); 
 		
@@ -43,7 +44,7 @@ public class Client {
 	    			e.printStackTrace();
 	    		}
 	        }
-		}
+		} // 예외처리로 수정 
 	}
 
 	private boolean checkLogin(ServerIF server, ArrayList<Student> studentData, boolean isLoggedIn) throws MalformedURLException, RemoteException, NotBoundException { 
@@ -77,7 +78,7 @@ public class Client {
 			    System.out.println("학번: " + student.studentId + "     " + 
 			    					"이름: " + student.getName() + "     " + 
 			    					"학과: " + student.getDepartment());
-			    System.out.println("수강 강좌번호 : " + student.getCompletedCourses() + "\n");
+			    System.out.println("수강 강좌번호: " + student.getCompletedCourses() + "\n");
 			}
 		}
 		
@@ -88,9 +89,9 @@ public class Client {
     					"교수: " + course.getProfessor() + "     " + 
     					"강좌이름: " + course.getCourseName());
 			    if(course.getCompletedCourseList().isEmpty()) {
-				    System.out.println("수강학생이 없습니다.\n");
+				    System.out.println("선이수 과목이 없습니다.\n");
 			    } else {
-				    System.out.println("수강학생 학번: " + course.getCompletedCourseList() + "\n");
+				    System.out.println("선이수 과목번호: " + course.getCompletedCourseList() + "\n");
 			    }
 			}
 		}
