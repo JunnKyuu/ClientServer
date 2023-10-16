@@ -28,11 +28,44 @@ public class Server extends UnicastRemoteObject implements ServerIF {
 	}
 
 	@Override
-	public ArrayList<Student> getAllStudent() throws RemoteException {
+	public ArrayList<Student> getAllStudent() throws RemoteException, NullDataException {
 		return data.getAllStudent();
 	}
 	
+	@Override
 	public ArrayList<Course> getAllCourse() throws RemoteException {
 		return data.getAllCourse();
+	}
+
+	@Override
+	public boolean addStudentRecords(String studentInfo) throws RemoteException {
+		if(data.addStudentRecords(studentInfo)) return true;
+		else return false;
+	}
+
+	@Override
+	public boolean deleteStudentRecords(String studentId) throws RemoteException {
+		if(data.deleteStudentRecords(studentId)) return true;
+		else return false;
+	}
+	
+	@Override
+	public boolean addCourseRecords(String courseInfo) throws RemoteException {
+		if(data.addCourseRecords(courseInfo)) return true;
+		else return false;
+	}
+	
+	@Override
+	public boolean deleteCourseRecords(String courseId) throws RemoteException {
+		if(data.deleteCourseRecords(courseId)) return true;
+		else return false;
+	}
+	
+	public boolean checkId(String inputId, String inputPw) throws RemoteException, NullDataException {
+		boolean check = false;
+		for(Student student : data.getAllStudent()) {
+			if(inputId.equals(student.getStudentId()) && inputPw.equals(student.getName())) check = true;
+		}
+		return check;
 	}
 }

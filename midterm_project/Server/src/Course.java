@@ -20,4 +20,8 @@ public class Course implements Serializable{
     		this.completedCoursesList.add(stringTokenizer.nextToken());
     	}
     }
+    
+    public boolean match(String courseId) {
+        return this.courseId.equals(courseId);
+    }
 }

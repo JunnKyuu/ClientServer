@@ -33,12 +33,36 @@ public class Data extends UnicastRemoteObject implements DataIF {
 	}
 	
 	@Override
-	public ArrayList<Student> getAllStudent() throws RemoteException {
+	public ArrayList<Student> getAllStudent() throws RemoteException, NullDataException {
 		return studentList.getAllStudentRecords();
-	}
+	}	
 	
+	@Override
 	public ArrayList<Course> getAllCourse() throws RemoteException {
 		return courseList.getAllCourseRecords();
 	}
 	
+	@Override
+	public boolean addStudentRecords(String studentInfo) throws RemoteException {
+		if(studentList.addStudentRecords(studentInfo)) return true;
+		else return false;
+	}
+	
+	@Override
+	public boolean deleteStudentRecords(String studentId) throws RemoteException {
+		if(studentList.deleteStudentRecords(studentId)) return true;
+		else return false;
+	}	
+	
+	@Override
+	public boolean addCourseRecords(String courseInfo) throws RemoteException {
+		if(courseList.addCourseRecords(courseInfo)) return true;
+		else return false;
+	}	
+	
+	@Override
+	public boolean deleteCourseRecords(String courseId) throws RemoteException {
+		if(courseList.deleteCourseRecords(courseId)) return true;
+		else return false;
+	}
 }
