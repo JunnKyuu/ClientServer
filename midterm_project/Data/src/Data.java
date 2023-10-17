@@ -40,8 +40,8 @@ public class Data extends UnicastRemoteObject implements DataIF {
 	@Override
 	public ArrayList<Course> getAllCourse() throws RemoteException {
 		return courseList.getAllCourseRecords();
-	}
-	
+	} 		
+
 	@Override
 	public boolean addStudentRecords(String studentInfo) throws RemoteException {
 		if(studentList.addStudentRecords(studentInfo)) return true;

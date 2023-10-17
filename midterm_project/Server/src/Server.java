@@ -69,3 +69,5 @@ public class Server extends UnicastRemoteObject implements ServerIF {
 		return check;
 	}
 }
+
+
