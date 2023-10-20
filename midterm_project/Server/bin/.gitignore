@@ -1,7 +1,2 @@
-/Course.class
-/DataIF.class
-/NullDataException.class
-/Server.class
-/ServerIF.class
-/Student.class
-/TokenProvider.class
+/DatabaseConnection.class
+/DBConnection.class
