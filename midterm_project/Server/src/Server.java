@@ -3,18 +3,12 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Server extends UnicastRemoteObject implements ServerIF {
-	public DBConnection dbConnection;
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    protected Server() throws RemoteException { 
-        super();
-        this.dbConnection = new DBConnection();
-    }
+    protected Server() throws RemoteException { super(); }
 
     public static void main(String[] args) throws NotBoundException {
         try {
@@ -24,5 +18,29 @@ public class Server extends UnicastRemoteObject implements ServerIF {
         } catch (RemoteException | MalformedURLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public ArrayList<String> getSelect() {
+    	DBConnection db;
+    	db = new DBConnection();
+		return db.getSelect();
+    }
+    
+    public void getInsert() {
+    	DBConnection db;
+    	db = new DBConnection();
+		db.getInsert();
+    }
+    
+    public void getDelete() {
+    	DBConnection db;
+    	db = new DBConnection();
+		db.getDelete();
+    }
+    
+    public void getUpdate() {
+    	DBConnection db;
+    	db = new DBConnection();
+		db.getUpdate();
     }
 }
