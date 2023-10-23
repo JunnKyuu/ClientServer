@@ -1,2 +1,7 @@
-/TraceLog.class
+/DAO.class
+/DBConnection.class
 /Log.class
+/Server.class
+/ServerIF.class
+/TokenManager$User.class
+/TokenManager.class
