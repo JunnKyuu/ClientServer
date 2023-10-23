@@ -21,7 +21,7 @@ public class Client {
 					showSelect(server.getSelect("students"));
 					break;
 				case "2":
-					System.out.println("studentsId: ");
+					System.out.println("studentId: ");
 					String studentId = reader.readLine().trim();
 					showSelect(server.getIdSelect("students", studentId));
 					break;
@@ -73,8 +73,9 @@ public class Client {
 	
 	private static void showSelect(ArrayList<String> dataList) {
 		if(dataList.isEmpty()) {
-			System.out.println("Data is empty");
+			System.out.println("***Data is empty***");
 		} else {
+			System.out.println("***Data from Mysql***\n");
 			for (String data : dataList) {
 	            System.out.println(data);
 	        }

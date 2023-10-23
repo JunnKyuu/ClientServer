@@ -24,6 +24,7 @@ public class DBConnection {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LMS", "root", "leejunkyu87");
 			System.out.println("***Mysql Connected***\n");
+	    	Log.TraceLog("Mysql Connected");
 		} 
 		catch (ClassNotFoundException e) { System.out.println("MYQSL DRIVER ERROR"); e.printStackTrace();} 
 		catch (SQLException e) { System.out.println("DB CONNECTECTION ERROR"); e.printStackTrace(); }
@@ -39,6 +40,7 @@ public class DBConnection {
 		Statement pStatement = null;
 		ResultSet result = null;
 		if(message.equals("students")) {
+	    	Log.TraceLog("Client request all students data");
 			try {
 				pStatement = connection.createStatement();
 				result = pStatement.executeQuery(sql);
@@ -63,6 +65,7 @@ public class DBConnection {
 		}
 		
 		if(message.equals("courses")) {
+			Log.TraceLog("Client request all courses data");
 			try {
 				pStatement = connection.createStatement();
 				result = pStatement.executeQuery(sql);
@@ -121,6 +124,7 @@ public class DBConnection {
 	                        + "name : " + name + "\n"
 	                        + "department : " + department + "\n"
 	                        + "completedCourseList : " + completedCourseList + "\n";
+	    			Log.TraceLog("Client requests " + name + " student data");
 	            } else if (message.equals("courses")) {
 	                String courseId = result.getString("courseId");
 	                String professor = result.getString("professor");
@@ -130,6 +134,7 @@ public class DBConnection {
 	                        + "professor : " + professor + "\n"
 	                        + "name : " + name + "\n"
 	                        + "completedCourseList : " + completedCourseList + "\n";
+	    			Log.TraceLog("Client requests " + name + " course data");
 	            }
 	            dataList.add(answer);
 	        }
@@ -156,6 +161,7 @@ public class DBConnection {
 		Connection connection = getConnection();
 		PreparedStatement pStatement = null;
 		if(message.equals("students")) {
+			Log.TraceLog("Client requests insert some students data");
 			try {
 				pStatement = connection.prepareStatement(sql);
 				System.out.println("studentId : ");
@@ -189,6 +195,7 @@ public class DBConnection {
 			}
 		}
 		if(message.equals("courses")) {
+			Log.TraceLog("Client requests insert some courses data");
 			try {
 				pStatement = connection.prepareStatement(sql);
 				System.out.println("courseId : ");
@@ -233,8 +240,14 @@ public class DBConnection {
 		PreparedStatement pStatement = null;
 		try {
 			pStatement = connection.prepareStatement(sql);
-			if(message.equals("students")) System.out.println("studentId : ");
-			if(message.equals("courses")) System.out.println("courseId : ");
+			if(message.equals("students")) {
+				System.out.println("studentId : ");
+				Log.TraceLog("Client requests delete some students data");
+			}
+			if(message.equals("courses")) {
+				System.out.println("courseId : ");
+				Log.TraceLog("Client requests delete some courses data");
+			}
 			pStatement.setString(1, scanner.next());
 			int result = pStatement.executeUpdate();
 			if(result !=0 ) { System.out.println(result + " deleted!"); }
@@ -253,20 +266,4 @@ public class DBConnection {
 		}
 		System.out.println("***Delete Success***");
 	}
-//	
-//	public void getUpdate() {
-//		String sql = "UPDATE Students SET completedCourseList='000000' WHERE studentId=?";
-//		Connection connection = getConnection();
-//		Scanner scanner = new Scanner(System.in);
-//		PreparedStatement pStatement = null;
-//		try {
-//			pStatement = connection.prepareStatement(sql);
-//			System.out.println("studentId: ");
-//			pStatement.setString(1, scanner.next());
-//			int count = pStatement.executeUpdate();
-//			System.out.println(count + " executed!");
-//		} catch (SQLException e) { e.printStackTrace(); }
-//		System.out.println("***Update Success***");
-//
-//	}
 }

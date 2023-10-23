@@ -15,6 +15,7 @@ public class Server extends UnicastRemoteObject implements ServerIF {
             Server server = new Server();
             Naming.rebind("Server", server);
             System.out.println("Server is ready!!");
+        	Log.TraceLog("Server Connected");
         } catch (RemoteException | MalformedURLException e) {
             e.printStackTrace();
         }
