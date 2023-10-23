@@ -20,27 +20,27 @@ public class Server extends UnicastRemoteObject implements ServerIF {
         }
     }
     
-    public ArrayList<String> getSelect() {
+    public ArrayList<String> getSelect(String message) {
     	DBConnection db;
     	db = new DBConnection();
-		return db.getSelect();
+		return db.getSelect(message);
     }
     
-    public void getInsert() {
+    public ArrayList<String> getIdSelect(String message, String id) {
     	DBConnection db;
     	db = new DBConnection();
-		db.getInsert();
+		return db.getIdSelect(message, id);
     }
     
-    public void getDelete() {
+    public void getInsert(String message) {
     	DBConnection db;
     	db = new DBConnection();
-		db.getDelete();
+		db.getInsert(message);
     }
     
-    public void getUpdate() {
+    public void getDelete(String message) {
     	DBConnection db;
     	db = new DBConnection();
-		db.getUpdate();
+		db.getDelete(message);
     }
 }

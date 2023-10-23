@@ -15,18 +15,35 @@ public class Client {
 				server = (ServerIF) Naming.lookup("Server");
 				printMenu();
 				String sChoice = reader.readLine().trim();
+				System.out.println("\n");
 				switch(sChoice) {
 				case "1":
-					showSelect(server.getSelect());
+					showSelect(server.getSelect("students"));
 					break;
 				case "2":
-					server.getInsert();
+					System.out.println("studentsId: ");
+					String studentId = reader.readLine().trim();
+					showSelect(server.getIdSelect("students", studentId));
 					break;
 				case "3":
-					server.getDelete();
+					server.getInsert("students");
 					break;
 				case "4":
-					server.getUpdate();
+					server.getDelete("students");
+					break;
+				case "5":
+					showSelect(server.getSelect("courses"));
+					break;
+				case "6":
+					System.out.println("courseId: ");
+					String courseId = reader.readLine().trim();
+					showSelect(server.getIdSelect("courses", courseId));
+					break;
+				case "7":
+					server.getInsert("courses");
+					break;
+				case "8":
+					server.getDelete("courses");
 					break;
 				case "x":
 					System.out.println("Exit!!!");
@@ -42,17 +59,25 @@ public class Client {
 	private static void printMenu() {
 		String menu = 
 				"--------------- MENU ---------------\n" +
-				"1. Show Students Data\n" +
-				"2. Add Student Data\n" + 
-				"3. Delete Student Data\n" +
-				"4. Update Student Data\n" +
+				"1. Show All Students Data\n" +
+				"2. Show One Student Data\n" +
+				"3. Add Student Data\n" + 
+				"4. Delete Student Data\n" +
+				"5. Show All Courses Data\n" +
+				"6. Show One Course Data\n" +
+				"7. Add Course Data\n" +
+				"8. Delete Course Data\n" +
 				"x. Exit";
 		System.out.println(menu);
     }
 	
-	private static void showSelect(ArrayList<String> studentList) {
-		for(int i = 0; i<studentList.size(); i++) {
-			System.out.println(studentList.get(i));
+	private static void showSelect(ArrayList<String> dataList) {
+		if(dataList.isEmpty()) {
+			System.out.println("Data is empty");
+		} else {
+			for (String data : dataList) {
+	            System.out.println(data);
+	        }
 		}
 	}
 }

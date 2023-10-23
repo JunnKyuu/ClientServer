@@ -3,8 +3,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface ServerIF extends Remote {
-	ArrayList<String> getSelect() throws RemoteException;
-	void getInsert() throws RemoteException;
-	void getDelete() throws RemoteException;
-	void getUpdate() throws RemoteException;
+	ArrayList<String> getSelect(String message) throws RemoteException;
+	ArrayList<String> getIdSelect(String message, String id) throws RemoteException;
+	void getInsert(String message) throws RemoteException;
+	void getDelete(String message) throws RemoteException;
 }
