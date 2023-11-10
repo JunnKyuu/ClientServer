@@ -16,21 +16,13 @@ public abstract class CommonFilterImpl implements CommonFilter {
 	public void connectInputTo(CommonFilter previousFilter) throws IOException {
 		in.connect(previousFilter.getPipedOutputStream()); // 연결 
 	}
-	public PipedInputStream getPipedInputStream() {
-		return in;
-	}
-	public PipedOutputStream getPipedOutputStream() {
-		return out;
-	}
+	public PipedInputStream getPipedInputStream() { return in; }
+	public PipedOutputStream getPipedOutputStream() { return out; }	
+	abstract public boolean specificComputationForFilter() throws IOException; 
 	
-	abstract public boolean specificComputationForFilter() throws IOException;
-	// Implementation defined in Runnable interface for thread
-	// abstract: 부모에서 선언만 하고, 자식에서 구현을 해야한다. 
 	public void run() {
-		// 자바에서 thread를 실행시키려면 run함수를 써야함. main() 같은 느낌 
 		try {
 			specificComputationForFilter();
-			// 지금은 선언만 되어있어서 자식에서 선언된 것을 실행한다. 
 		} catch (IOException e) {
 			if (e instanceof EOFException) return;
 			else System.out.println(e);
@@ -38,6 +30,7 @@ public abstract class CommonFilterImpl implements CommonFilter {
 			closePorts();
 		}
 	}
+	
 	private void closePorts() {
 		try {
 			out.close();
