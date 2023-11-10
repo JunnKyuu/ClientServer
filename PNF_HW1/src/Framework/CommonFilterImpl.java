@@ -1,6 +1,3 @@
-/**
- * Copyright(c) 2021 All rights reserved by Jungho Kim in Myungji University.
- */
 package Framework;
 
 import java.io.EOFException;
@@ -10,7 +7,7 @@ import java.io.PipedOutputStream;
 import java.util.Vector;
 
 public abstract class CommonFilterImpl implements CommonFilter {
-	protected Vector<PipedInputStream> in = new Vector<PipedInputStream>();// 들어오는 파이프 
+	protected PipedInputStream in = new PipedInputStream();// 들어오는 파이프 
 	protected PipedOutputStream out = new PipedOutputStream(); // 나가는 파이프 
 
 	public void connectOutputTo(CommonFilter nextFilter) throws IOException {
