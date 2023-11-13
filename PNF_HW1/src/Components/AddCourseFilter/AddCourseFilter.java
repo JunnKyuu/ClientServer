@@ -25,13 +25,13 @@ public class AddCourseFilter extends CommonFilterImpl{
                 		buffer[idx-3] == '4' &&
                 		buffer[idx-2] == '5' 
                 		) is12345 = true;              
-            }           
+            }   
             
-            if (!is12345) {
-                for (int i = 0; i < 5; i++) {
-                    buffer[idx++] = (byte) ('1' + i);
-                }
-                is12345 = true;
+            
+            if(!is12345) {   
+            	for(int i = 0; i<idx; i++) {
+            		System.out.println((char)buffer[i]);
+            	}            	
             }
 
             if(is12345) {

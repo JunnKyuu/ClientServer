@@ -7,14 +7,14 @@ import java.io.PipedOutputStream;
 import java.util.Vector;
 
 public abstract class CommonFilterImpl implements CommonFilter {
-	protected PipedInputStream in = new PipedInputStream();// 들어오는 파이프 
-	protected PipedOutputStream out = new PipedOutputStream(); // 나가는 파이프 
+	protected PipedInputStream in = new PipedInputStream();
+	protected PipedOutputStream out = new PipedOutputStream(); 
 
 	public void connectOutputTo(CommonFilter nextFilter) throws IOException {
-		out.connect(nextFilter.getPipedInputStream()); // 연결 
+		out.connect(nextFilter.getPipedInputStream()); 
 	}
 	public void connectInputTo(CommonFilter previousFilter) throws IOException {
-		in.connect(previousFilter.getPipedOutputStream()); // 연결 
+		in.connect(previousFilter.getPipedOutputStream());  
 	}
 	public PipedInputStream getPipedInputStream() { return in; }
 	public PipedOutputStream getPipedOutputStream() { return out; }	
