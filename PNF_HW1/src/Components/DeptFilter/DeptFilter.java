@@ -19,12 +19,14 @@ public class DeptFilter extends CommonFilterImpl{
                 if(byte_read == ' ') numOfBlank++;  
                 if(byte_read != -1) buffer[idx++] = (byte)byte_read;
                 if(numOfBlank == checkBlank && buffer[idx-3] == 'C' && buffer[idx-2] == 'S') isCS = true;
-            }      
+            }
+            
             if(isCS == true) {
                 for(int i = 0; i<idx; i++) 
                     out.write((char)buffer[i]);
                 isCS = false;
             }
+            
             if (byte_read == -1) return true;
             idx = 0;
             numOfBlank = 0;
