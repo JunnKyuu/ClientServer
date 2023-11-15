@@ -14,7 +14,7 @@ public class AddCourseFilter extends CommonFilterImpl{
         byte[] buffer = new byte[1000];
         int byte_read = 0;
         String student = "";
-        String[] lines;
+        String[] lines; // string을 저장할 배열 
         
         while (true) {
             while ((byte_read = in.read()) != '\n' && byte_read != -1) {
@@ -22,21 +22,17 @@ public class AddCourseFilter extends CommonFilterImpl{
                 if (byte_read != -1) buffer[idx++] = (byte) byte_read;
             }
             
-            // byte -> String
             student = new String(buffer, 0, idx, StandardCharsets.UTF_8);
             lines = student.split("\n");
+                        
+            for(String str: lines) {
+            	if(!str.contains("12345")) System.out.println(str);
+            }
             
-
-
             if (byte_read == -1) break;
             idx = 0;
             numOfBlank = 0;
         } 
-        
-        for(String str: lines) {
-	
-    		System.out.println(str);
-
-        }
+        return true;
     }
 }
