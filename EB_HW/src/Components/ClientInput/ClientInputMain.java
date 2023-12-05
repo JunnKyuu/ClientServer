@@ -42,6 +42,14 @@ public class ClientInputMain {
 					eventBus.sendEvent(new Event(EventId.RegisterCourses, makeCourseInfo()));
 					printLogSend(EventId.RegisterCourses);
 					break;
+				case "5":
+					eventBus.sendEvent(new Event(EventId.DeleteStudents, removeStudentInfo()));
+					printLogSend(EventId.DeleteStudents);
+					break;
+				case "6":
+					eventBus.sendEvent(new Event(EventId.DeleteCourses, makeCourseInfo()));
+					printLogSend(EventId.DeleteCourses);
+					break;
 				case "0":
 					eventBus.sendEvent(new Event(EventId.QuitTheSystem, "Quit the system!!!"));
 					printLogSend(EventId.QuitTheSystem);
@@ -55,6 +63,23 @@ public class ClientInputMain {
 				e.printStackTrace();
 			}
 		}
+	}
+	private static String removeStudentInfo() throws IOException {
+		String userInput = "";
+		System.out.println("\nEnter student ID and press return (Ex. 20131234)>> ");
+		userInput = new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
+		System.out.println("\nEnter family name and press return (Ex. Hong)>> ");
+		userInput += " " + new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
+		System.out.println("\nEnter first name and press return (Ex. Gildong)>> ");
+		userInput += " " + new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
+		System.out.println("\nEnter department and press return (Ex. CS)>> ");
+		userInput += " " + new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
+		System.out.println(
+				"\nEnter a list of IDs (put a space between two different IDs) of the completed courses and press return >> ");
+		System.out.println("(Ex. 17651 17652 17653 17654)");
+		userInput += " " + new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
+		System.out.println("\n ** Message: " + userInput + "\n");
+		return userInput;
 	}
 	private static String makeStudentInfo() throws IOException {
 		String userInput = "";
@@ -89,12 +114,12 @@ public class ClientInputMain {
 		System.out.println("\n ** Message: " + userInput + "\n");
 		return userInput;
 	}
-	//@SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	private static String setStudentId() throws IOException {
 		System.out.println("\nEnter student ID and press return (Ex. 20131234)>> ");
 		return new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
 	}
-	//@SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	private static String setCourseId() throws IOException {
 		System.out.println("\nEnter course ID and press return (Ex. 12345)>> ");
 		return new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
@@ -104,6 +129,8 @@ public class ClientInputMain {
 		System.out.println("2. List Courses");
 		System.out.println("3. Register a new Student");
 		System.out.println("4. Register a new Course");
+		System.out.println("5. Remove a Student");
+		System.out.println("6. Remove a Course");
 		System.out.println("0. Quit the system");
 		System.out.print("\n Choose No.: ");
 	}

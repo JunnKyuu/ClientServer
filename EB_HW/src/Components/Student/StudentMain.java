@@ -41,6 +41,10 @@ public class StudentMain {
 					printLogEvent("Get", event);
 					eventBus.sendEvent(new Event(EventId.ClientOutput, registerStudent(studentsList, event.getMessage())));
 					break;
+				case DeleteStudents:
+					printLogEvent("Get", event);
+					eventBus.sendEvent(new Event(EventId.ClientOutput, deleteStudent(studentsList, event.getMessage())));
+					break;
 				case QuitTheSystem:
 					printLogEvent("Get", event);
 					eventBus.unRegister(componentId);
@@ -52,13 +56,26 @@ public class StudentMain {
 			}
 		}
 	}
-	private static String registerStudent(StudentComponent studentsList, String message) {
-		Student  student = new Student(message);
-		if (!studentsList.isRegisteredStudent(student.studentId)) {
-			studentsList.vStudent.add(student);
-			return "This student is successfully added.";
-		} else
-			return "This student is already registered.";
+	private static String deleteStudent(StudentComponent studentsList, String message) {
+		Student student = new Student(message);
+		boolean isRemoved = studentsList.isRegisteredStudent(student.studentId);
+		if(isRemoved) {
+	        studentsList.vStudent.remove(student);
+	        return "This student is successfully removed.";
+	    } else {
+	        return "This student is not found.";
+	    }
+	}
+	// 학생 등록 -> 파일에 저장 
+	private static String registerStudent(StudentComponent studentsList, String message) throws IOException {
+	    Student student = new Student(message);
+	    if (!studentsList.isRegisteredStudent(student.getStudentId())) {
+	        studentsList.vStudent.add(student);
+	        studentsList.registerStudentToFile(student, "Students.txt");
+	        return "This student is successfully added.";
+	    } else {
+	        return "This student is already registered.";
+	    }
 	}
 	private static String makeStudentList(StudentComponent studentsList) {
 		String returnString = "";

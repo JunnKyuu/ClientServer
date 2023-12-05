@@ -5,8 +5,10 @@
 package Components.Student;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -34,4 +36,14 @@ public class StudentComponent {
 		}
 		return false;
 	}
+	// 파일에 학생 정보 저장
+	public void registerStudentToFile(Student student, String sStudentFileName) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(sStudentFileName, true))) {
+        	writer.newLine();
+        	writer.newLine();
+        	writer.newLine();
+        	writer.newLine();
+        	writer.write(student.getString());
+        }
+    }
 }

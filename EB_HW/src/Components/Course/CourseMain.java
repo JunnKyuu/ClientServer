@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 
+import Components.Student.Student;
+import Components.Student.StudentComponent;
 import Framework.Event;
 import Framework.EventId;
 import Framework.EventQueue;
@@ -50,13 +52,16 @@ public class CourseMain {
 			}
 		}
 	}
-	private static String registerCourse(CourseComponent coursesList, String message) {
+	// 수업 등록 -> 파일에 저장
+	private static String registerCourse(CourseComponent coursesList, String message) throws IOException {
 		Course course = new Course(message);
-		if (!coursesList.isRegisteredCourse(course.courseId)) {
-			coursesList.vCourse.add(course);
-			return "This course is successfully added.";
-		} else
-			return "This course is already registered.";
+	    if (!coursesList.isRegisteredCourse(course.getCourseId())) {
+	    	coursesList.vCourse.add(course);
+	    	coursesList.registerCourseToFile(course, "Courses.txt");
+	        return "This course is successfully added.";
+	    } else {
+	        return "This course is already registered.";
+	    }
 	}
 	private static String makeCourseList(CourseComponent coursesList) {
 		String returnString = "";

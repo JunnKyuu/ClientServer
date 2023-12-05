@@ -4,10 +4,14 @@
 package Components.Course;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import Components.Student.Student;
 
 public class CourseComponent {
     protected ArrayList<Course> vCourse;
@@ -29,5 +33,15 @@ public class CourseComponent {
             if(((Course) this.vCourse.get(i)).match(courseId)) return true;
         }
         return false;
+    }
+    // 파일에 수업 정보 저장 
+    public void registerCourseToFile(Course course, String sCourseFileName) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(sCourseFileName, true))) {
+        	writer.newLine();
+        	writer.newLine();
+        	writer.newLine();
+        	writer.newLine();
+        	writer.write(course.getString());
+        }
     }
 }
