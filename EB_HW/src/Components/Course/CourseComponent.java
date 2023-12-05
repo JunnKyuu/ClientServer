@@ -40,8 +40,20 @@ public class CourseComponent {
         	writer.newLine();
         	writer.newLine();
         	writer.newLine();
-        	writer.newLine();
         	writer.write(course.getString());
+        	writer.newLine();
         }
     }
+    // 파일에 수업 정보 업데이트를 저장
+ 	public void updateCourseFile(ArrayList<Course> coursesList, String sCourseFileName) throws IOException {
+ 	    try (BufferedWriter writer = new BufferedWriter(new FileWriter(sCourseFileName))) {
+ 	        for (Course course : coursesList) {
+ 	            writer.newLine();
+ 	            writer.newLine();
+ 	            writer.write(course.getString());
+ 	            writer.newLine();
+ 	            writer.newLine();
+ 	        }
+ 	    }
+ 	}
 }

@@ -42,8 +42,20 @@ public class StudentComponent {
         	writer.newLine();
         	writer.newLine();
         	writer.newLine();
-        	writer.newLine();
         	writer.write(student.getString());
+        	writer.newLine();
         }
     }
+	// 파일에 학생 정보 업데이트를 저장
+	public void updateStudentFile(ArrayList<Student> studentList, String sStudentFileName) throws IOException {
+	    try (BufferedWriter writer = new BufferedWriter(new FileWriter(sStudentFileName))) {
+	        for (Student student : studentList) {
+	            writer.newLine();
+	            writer.newLine();
+	            writer.write(student.getString());
+	            writer.newLine();
+	            writer.newLine();
+	        }
+	    }
+	}
 }

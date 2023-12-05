@@ -42,6 +42,10 @@ public class CourseMain {
 					printLogEvent("Get", event);
 					eventBus.sendEvent(new Event(EventId.ClientOutput, registerCourse(coursesList, event.getMessage())));
 					break;
+				case DeleteCourses:
+					printLogEvent("Get", event);
+					eventBus.sendEvent(new Event(EventId.ClientOutput, deleteCourse(coursesList, event.getMessage())));
+					break;
 				case QuitTheSystem:
 					eventBus.unRegister(componentId);
 					done = true;
@@ -52,6 +56,17 @@ public class CourseMain {
 			}
 		}
 	}
+	// 수업 삭제 -> 파일에 저장
+		private static String deleteCourse(CourseComponent coursesList, String message) throws IOException {
+		    Course course = new Course(message);
+		    if (coursesList.isRegisteredCourse(course.getCourseId())) {
+		    	coursesList.vCourse.removeIf(s -> s.match(course.getCourseId())); 
+		    	coursesList.updateCourseFile(coursesList.vCourse, "Courses.txt"); 
+		        return "This course is successfully deleted.";
+		    } else {
+		        return "This course is not deleted.";
+		    }
+		}
 	// 수업 등록 -> 파일에 저장
 	private static String registerCourse(CourseComponent coursesList, String message) throws IOException {
 		Course course = new Course(message);

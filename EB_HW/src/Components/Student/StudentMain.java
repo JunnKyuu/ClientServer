@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
+import java.util.ArrayList;
 
 import Framework.Event;
 import Framework.EventId;
@@ -56,14 +57,15 @@ public class StudentMain {
 			}
 		}
 	}
-	private static String deleteStudent(StudentComponent studentsList, String message) {
-		Student student = new Student(message);
-		boolean isRemoved = studentsList.isRegisteredStudent(student.studentId);
-		if(isRemoved) {
-	        studentsList.vStudent.remove(student);
-	        return "This student is successfully removed.";
+	// 학생 삭제 -> 파일에 저장
+	private static String deleteStudent(StudentComponent studentsList, String message) throws IOException {
+	    Student student = new Student(message);
+	    if (studentsList.isRegisteredStudent(student.getStudentId())) {
+	        studentsList.vStudent.removeIf(s -> s.match(student.getStudentId())); 
+	        studentsList.updateStudentFile(studentsList.vStudent, "Students.txt"); 
+	        return "This student is successfully deleted.";
 	    } else {
-	        return "This student is not found.";
+	        return "This student is not deleted.";
 	    }
 	}
 	// 학생 등록 -> 파일에 저장 
